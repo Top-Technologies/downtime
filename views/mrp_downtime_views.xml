@@ -1,0 +1,79 @@
+<odoo>
+    <record id="view_downtime_tree" model="ir.ui.view">
+        <field name="name">mrp.downtime.tree</field>
+        <field name="model">mrp.downtime</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="duration_hours"/>
+                <field name="reason_id"/>
+                <field name="responsible_user_ids" widget="many2many_tags"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_downtime_form" model="ir.ui.view">
+        <field name="name">mrp.downtime.form</field>
+        <field name="model">mrp.downtime</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                     <!-- Submit (Draft) -->
+                    <button name="action_submit"
+                            type="object"
+                            string="Submit"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+
+                    <!-- Edit -->
+                    <button name="action_edit"
+                            type="object"
+                            string="Edit"
+                            invisible="state != 'submitted'"/>
+
+                    <!-- Update & Submit -->
+                    <button name="action_submit"
+                            type="object"
+                            string="Update &amp; Submit"
+                            class="btn-primary"
+                            invisible="state != 'submitted' or not is_editable"/>
+
+                    <!-- Approve -->
+                    <button name="action_approve"
+                            type="object"
+                            string="Approve"
+                            class="btn-success"
+                            invisible="state != 'submitted'"/>
+
+                    <field name="state" widget="statusbar"/>
+                    
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="production_id" readonly="not is_editable"/>
+                            <field name="reason_id" readonly="not is_editable"/>
+                            <field name="responsible_user_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="reported_by"/>
+                        </group>
+
+                        <group>
+                            <field name="start_time" readonly="not is_editable"/>
+                            <field name="end_time" readonly="not is_editable"/>
+                            <field name="duration_hours"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="description" readonly="not is_editable"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>

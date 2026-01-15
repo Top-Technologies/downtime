@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_downtime_user,mrp.downtime,model_mrp_downtime,base.group_user,1,1,1,0
+access_downtime_reason_user,mrp.downtime.reason,model_mrp_downtime_reason,base.group_user,1,1,1,0

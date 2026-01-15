@@ -1,0 +1,25 @@
+<odoo>
+    <record id="action_downtime_logs" model="ir.actions.act_window">
+        <field name="name">Downtime Logs</field>
+        <field name="res_model">mrp.downtime</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_downtime_logs"
+              name="Downtime Logs"
+              parent="mrp.menu_mrp_manufacturing"
+              action="action_downtime_logs"
+              sequence="30"/>
+
+    <record id="action_downtime_reasons" model="ir.actions.act_window">
+        <field name="name">Downtime Reasons</field>
+        <field name="res_model">mrp.downtime.reason</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_downtime_reasons"
+              name="Downtime Reasons"
+              parent="mrp.menu_mrp_configuration"
+              action="action_downtime_reasons"
+              sequence="40"/>
+</odoo>

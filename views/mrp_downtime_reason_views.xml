@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_downtime_reason_tree" model="ir.ui.view">
+        <field name="name">mrp.downtime.reason.tree</field>
+        <field name="model">mrp.downtime.reason</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="category"/>
+                <field name="department_id"/>
+                <field name="responsible_user_ids"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_downtime_reason_form" model="ir.ui.view">
+        <field name="name">mrp.downtime.reason.form</field>
+        <field name="model">mrp.downtime.reason</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="category"/>
+                        <field name="department_id"/>
+                        <field name="responsible_user_ids"
+                               widget="many2many_tags"
+                               domain="[('employee_ids.department_id', '=', department_id)]"/>
+                        <field name="notification_type"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
