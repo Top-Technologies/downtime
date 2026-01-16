@@ -7,7 +7,7 @@
                 <field name="name"/>
                 <field name="category"/>
                 <field name="department_id"/>
-                <field name="responsible_user_ids"/>
+                <field name="responsible_user_ids" widget="many2many_tags"/>
                 <field name="active"/>
             </list>
         </field>

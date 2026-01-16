@@ -1,0 +1,9 @@
+<odoo>
+    <record id="seq_mrp_downtime" model="ir.sequence">
+        <field name="name">Downtime Log</field>
+        <field name="code">mrp.downtime</field>
+        <field name="prefix">DWN</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

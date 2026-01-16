@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 
+
 class MrpDowntimeReason(models.Model):
     _name = 'mrp.downtime.reason'
     _description = 'Downtime Reason'
@@ -7,7 +8,20 @@ class MrpDowntimeReason(models.Model):
 
     name = fields.Char(string='Reason', required=True)
 
-    category = fields.Char(string='Category')
+    category = fields.Selection(
+        [
+            ('mechanical', 'Mechanical'),
+            ('electrical', 'Electrical'),
+            ('material', 'Material'),
+            ('manpower', 'Manpower'),
+            ('planned', 'Planned'),
+            ('software', 'Software'),
+            ('other', 'Other')
+        ],
+        string="Category",
+        required=True,
+        default='other'
+    )
 
     department_id = fields.Many2one(
         'hr.department',

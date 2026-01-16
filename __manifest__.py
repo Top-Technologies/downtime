@@ -6,6 +6,7 @@
     'depends': ['mrp', 'mail', 'hr'],
     'data': [
         'security/ir.model.access.csv',
+        'data/mrp_downtime_sequence.xml',
         'views/mrp_downtime_reason_views.xml',
         'views/mrp_downtime_views.xml',
         'views/menu.xml',

@@ -6,7 +6,7 @@ class MrpDowntime(models.Model):
     _name = 'mrp.downtime'
     _description = 'Downtime Log'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _order = 'start_time desc'
+    _order = 'name desc'
 
     name = fields.Char(
         string='Reference',
@@ -93,16 +93,22 @@ class MrpDowntime(models.Model):
     # ----------------------------
     # CREATE → OdooBot chatter
     # ----------------------------
-    @api.model
-    def create(self, vals):
-        record = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('name', 'New') == 'New':
+                vals['name'] = self.env['ir.sequence'].next_by_code('mrp.downtime') or 'New'
 
-        record.message_post(
-            body=_("Downtime Log created by %s") % record.env.user.name,
-            subtype_xmlid="mail.mt_note"
-        )
+        records = super().create(vals_list)
 
-        return record
+        for record in records:
+            record.message_post(
+                body=_("Downtime Log created by %s") % record.env.user.name,
+                subtype_xmlid="mail.mt_note"
+            )
+
+        return records
+
 
     # ----------------------------
     # SUBMIT → Notify + OdooBot
@@ -138,11 +144,11 @@ class MrpDowntime(models.Model):
                 subtype_xmlid="mail.mt_note"
             )
 
-    
     def action_edit(self):
         for rec in self:
             if rec.reported_by != self.env.user:
-                raise UserError(_("Only the reporter can edit this downtime log."))
+                raise UserError(
+                    _("Only the reporter can edit this downtime log."))
 
             rec.is_editable = True
 
@@ -161,18 +167,18 @@ class MrpDowntime(models.Model):
                 subtype_xmlid="mail.mt_note"
             )
 
-
     # ----------------------------
     # EDIT AFTER SUBMISSION → Re-notify
     # ----------------------------
+
     def write(self, vals):
         res = super().write(vals)
 
-        # 🔕 Skip notifications during first submit
+        # Skip notifications during first submit
         if self.env.context.get('from_submit'):
             return res
 
-        # ✅ Only notify when update-submit is used
+        # Only notify when update-submit is used
         if self.env.context.get('from_update_submit'):
             for rec in self:
                 for user in rec.responsible_user_ids:
@@ -184,4 +190,3 @@ class MrpDowntime(models.Model):
                     )
 
         return res
-
