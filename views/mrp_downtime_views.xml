@@ -10,6 +10,7 @@
                 <field name="duration_hours"/>
                 <field name="reason_id"/>
                 <field name="responsible_user_ids" widget="many2many_tags"/>
+                <field name="category"/>
                 <field name="state"/>
             </list>
         </field>
@@ -26,50 +27,79 @@
                             type="object"
                             string="Submit"
                             class="btn-primary"
-                            invisible="state != 'draft'"/>
+                            modifiers="{
+                                'invisible': [
+                                    ('state', '!=', 'draft'),
+                                    ('is_reporter', '=', False)
+                                ]
+                            }"/>
 
                     <!-- Edit -->
                     <button name="action_edit"
                             type="object"
                             string="Edit"
-                            invisible="state != 'submitted'"/>
+                            class="btn-secondary"
+                            modifiers="{
+                                'invisible': [
+                                    ('state', '!=', 'submitted'),
+                                    ('is_reporter', '=', False)
+                                ]
+                            }"/>
 
                     <!-- Update & Submit -->
                     <button name="action_submit"
                             type="object"
                             string="Update &amp; Submit"
                             class="btn-primary"
-                            invisible="state != 'submitted' or not is_editable"/>
+                            modifiers="{
+                                'invisible': [
+                                    ('state', '!=', 'submitted'),
+                                    ('is_editable', '=', False),
+                                    ('is_reporter', '=', False)
+                                ]
+                            }"/>
 
                     <!-- Approve -->
                     <button name="action_approve"
                             type="object"
                             string="Approve"
                             class="btn-success"
-                            invisible="state != 'submitted'"/>
+                            modifiers="{
+                                'invisible': [
+                                    ('state', '!=', 'submitted'),
+                                    ('is_responsible', '=', False)
+                                ]
+                            }"/>
 
                     <field name="state" widget="statusbar"/>
                     
                 </header>
 
-                <sheet>
+                <sheet modifiers="{'readonly': [('is_editable', '=', False)]}">
+                    <div class="alert alert-warning"
+                        invisible="state != 'needs_update' or was_submitted == False">
+                        ⚠ This downtime log was modified after submission.
+                        Please click <b>Update &amp; Submit</b> to notify responsible users.
+                    </div>
+
                     <group>
                         <group>
                             <field name="production_id" readonly="not is_editable"/>
-                            <field name="reason_id" readonly="not is_editable"/>
+                            <field name="reason_id" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="responsible_user_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="category" readonly="1"/>
                             <field name="reported_by"/>
                         </group>
 
                         <group>
-                            <field name="start_time" readonly="not is_editable"/>
-                            <field name="end_time" readonly="not is_editable"/>
+                            <field name="start_time" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
+                            <field name="end_time" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="duration_hours"/>
                         </group>
                     </group>
 
                     <group>
-                        <field name="description" readonly="not is_editable"/>
+                        <field name="description" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                     </group>
                 </sheet>
                 <chatter/>
