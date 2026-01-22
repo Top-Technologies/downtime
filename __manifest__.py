@@ -1,8 +1,9 @@
 {
     'name': 'Manufacturing Downtime Management',
     'version': '1.0',
+    "author": "Natnael Yonas",
     'category': 'Manufacturing',
-    'summary': 'Log and manage manufacturing downtime with notifications',
+    'summary': 'Log and manage manufacturing downtime with notifications for responsible users, with approval workflow.',
     'depends': ['mrp', 'mail', 'hr'],
     'data': [
         'security/ir.model.access.csv',
