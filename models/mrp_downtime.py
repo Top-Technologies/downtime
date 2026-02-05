@@ -33,7 +33,7 @@ class MrpDowntime(models.Model):
     )
 
     duration_hours = fields.Float(
-        string='Duration (Hours)',
+        string='Duration (Minutes)',
         compute='_compute_duration',
         store=True,
         tracking=True
@@ -114,7 +114,7 @@ class MrpDowntime(models.Model):
         for rec in self:
             if rec.start_time and rec.end_time:
                 delta = rec.end_time - rec.start_time
-                rec.duration_hours = delta.total_seconds() / 3600
+                rec.duration_hours = delta.total_seconds() / 3600 * 60 # convert to minutes
             else:
                 rec.duration_hours = 0.0
     
