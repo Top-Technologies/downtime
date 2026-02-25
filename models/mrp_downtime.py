@@ -61,6 +61,18 @@ class MrpDowntime(models.Model):
         readonly=True
     )
 
+    operation_type = fields.Selection(
+        [
+            ('oil', 'Oil'),
+            ('plastic', 'Plastic'),
+            ('feed', 'Feed'),
+            ('other', 'Other')
+        ],
+        string="Operation Type",
+        required=True,
+        default='oil'
+    )
+
 
     reported_by = fields.Many2one(
         'res.users',
@@ -224,7 +236,7 @@ class MrpDowntime(models.Model):
 
         tracked_fields = {
             'start_time', 'end_time', 'reason_id',
-            'description', 'production_id'
+            'description', 'production_id', 'operation_type'
         }
 
         for rec in self:

@@ -5,12 +5,14 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
-                <field name="start_time"/>
-                <field name="end_time"/>
+                <field name="production_id" optional="hide"/>
+                <field name="operation_type" optional="hide"/>
+                <field name="start_time" optional="hide"/>
+                <field name="end_time" optional="hide"/>
                 <field name="duration_hours"/>
                 <field name="reason_id"/>
                 <field name="responsible_user_ids" widget="many2many_tags"/>
-                <field name="category"/>
+                <field name="category" optional="hide"/>
                 <field name="state"/>
             </list>
         </field>
@@ -92,6 +94,7 @@
                         </group>
 
                         <group>
+                            <field name="operation_type" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="start_time" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="end_time" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="duration_hours"/>
