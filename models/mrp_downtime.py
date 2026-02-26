@@ -61,6 +61,13 @@ class MrpDowntime(models.Model):
         readonly=True
     )
 
+    workcenter_id = fields.Many2one(
+        'mrp.workcenter',
+        string="Work Center",
+        tracking=True,
+        required=True
+    )
+
     operation_type = fields.Selection(
         [
             ('oil', 'Oil'),
@@ -236,7 +243,7 @@ class MrpDowntime(models.Model):
 
         tracked_fields = {
             'start_time', 'end_time', 'reason_id',
-            'description', 'production_id', 'operation_type'
+            'description', 'production_id', 'operation_type', 'workcenter_id'
         }
 
         for rec in self:

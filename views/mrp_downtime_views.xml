@@ -13,6 +13,8 @@
                 <field name="reason_id"/>
                 <field name="responsible_user_ids" widget="many2many_tags"/>
                 <field name="category" optional="hide"/>
+                <field name="workcenter_id" optional="hide"/>
+                <field name="reported_by" optional="hide"/>
                 <field name="state"/>
             </list>
         </field>
@@ -90,6 +92,9 @@
                             <field name="reason_id" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="responsible_user_ids" widget="many2many_tags" readonly="1"/>
                             <field name="category" readonly="1"/>
+                            <field name="workcenter_id" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"
+                                   invisible="category not in ('mechanical','electrical')"
+                                   required="category in ('mechanical','electrical')"/>
                             <field name="reported_by"/>
                         </group>
 
