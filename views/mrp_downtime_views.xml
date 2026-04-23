@@ -7,6 +7,7 @@
                 <field name="name"/>
                 <field name="production_id" optional="hide"/>
                 <field name="operation_type" optional="hide"/>
+                <field name="approval_request_reference" optional="hide"/>
                 <field name="start_time" optional="hide"/>
                 <field name="end_time" optional="hide"/>
                 <field name="duration_hours"/>
@@ -100,7 +101,8 @@
 
                         <group>
                             <field name="operation_type" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
-                           
+                            <field name="approval_request_reference" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"
+                                   invisible="operation_type != 'fleet'"/>
                             <field name="start_time" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="end_time" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="duration_hours"/>

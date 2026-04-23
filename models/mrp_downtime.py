@@ -78,10 +78,15 @@ class MrpDowntime(models.Model):
                 ('other', 'Other')
             ],
             string="Operation Type",
-            required=True,
-            default='oil'
+            required=True
         )
 
+    approval_request_reference = fields.Many2one(
+        'approval.request',
+        string="Approval Type Ref",
+        tracking=True,
+        required=True
+    )
 
     reported_by = fields.Many2one(
         'res.users',
@@ -245,7 +250,7 @@ class MrpDowntime(models.Model):
 
         tracked_fields = {
             'start_time', 'end_time', 'reason_id',
-            'description', 'production_id', 'operation_type', 'workcenter_id'
+            'description', 'production_id', 'operation_type', 'approval_request_reference', 'workcenter_id'
         }
 
         for rec in self:
