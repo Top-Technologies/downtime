@@ -8,7 +8,9 @@
     'data': [
         'security/ir.model.access.csv',
         'data/mrp_downtime_sequence.xml',
+        'data/operation_type_data.xml',
         'views/mrp_downtime_reason_views.xml',
+        'views/mrp_operation_type_views.xml',
         'views/mrp_downtime_views.xml',
         'views/menu.xml',
     ],

@@ -80,6 +80,13 @@ class MrpDowntime(models.Model):
         default='oil'
     )
 
+    operation_type_id = fields.Many2one(
+        'mrp.operation.type',
+        string="Operation Type",
+        required=True,
+        tracking=True
+    )
+
 
     reported_by = fields.Many2one(
         'res.users',
@@ -243,7 +250,7 @@ class MrpDowntime(models.Model):
 
         tracked_fields = {
             'start_time', 'end_time', 'reason_id',
-            'description', 'production_id', 'operation_type', 'workcenter_id'
+            'description', 'production_id', 'operation_type', 'operation_type_id', 'workcenter_id'
         }
 
         for rec in self:

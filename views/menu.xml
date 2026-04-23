@@ -22,4 +22,10 @@
               parent="mrp.menu_mrp_configuration"
               action="action_downtime_reasons"
               sequence="40"/>
+
+    <menuitem id="menu_operation_types"
+              name="Operation Types"
+              parent="mrp.menu_mrp_configuration"
+              action="action_mrp_operation_types"
+              sequence="41"/>
 </odoo>
