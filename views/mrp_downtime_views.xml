@@ -7,7 +7,6 @@
                 <field name="name"/>
                 <field name="production_id" optional="hide"/>
                 <field name="operation_type" optional="hide"/>
-                <field name="operation_type_id" optional="hide"/>
                 <field name="start_time" optional="hide"/>
                 <field name="end_time" optional="hide"/>
                 <field name="duration_hours"/>
@@ -101,7 +100,7 @@
 
                         <group>
                             <field name="operation_type" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
-                            <field name="operation_type_id" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
+                           
                             <field name="start_time" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="end_time" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                             <field name="duration_hours"/>
@@ -111,6 +110,7 @@
                     <group>
                         <field name="description" readonly="not is_editable" modifiers="{'readonly': [('is_editable','=',False)]}"/>
                     </group>
+
                 </sheet>
                 <chatter/>
             </form>

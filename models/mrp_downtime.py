@@ -69,23 +69,18 @@ class MrpDowntime(models.Model):
     )
 
     operation_type = fields.Selection(
-        [
-            ('oil', 'Oil'),
-            ('plastic', 'Plastic'),
-            ('feed', 'Feed'),
-            ('other', 'Other')
-        ],
-        string="Operation Type",
-        required=True,
-        default='oil'
-    )
-
-    operation_type_id = fields.Many2one(
-        'mrp.operation.type',
-        string="Operation Type",
-        required=True,
-        tracking=True
-    )
+            [
+                ('oil', 'Oil'),
+                ('plastic', 'Plastic'),
+                ('feed', 'Feed'),
+                ('fleet', 'Fleet'),
+                ('import & export', 'Import & Export'),
+                ('other', 'Other')
+            ],
+            string="Operation Type",
+            required=True,
+            default='oil'
+        )
 
 
     reported_by = fields.Many2one(
@@ -250,7 +245,7 @@ class MrpDowntime(models.Model):
 
         tracked_fields = {
             'start_time', 'end_time', 'reason_id',
-            'description', 'production_id', 'operation_type', 'operation_type_id', 'workcenter_id'
+            'description', 'production_id', 'operation_type', 'workcenter_id'
         }
 
         for rec in self:
