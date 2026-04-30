@@ -65,7 +65,7 @@ class MrpDowntime(models.Model):
         'mrp.workcenter',
         string="Work Center",
         tracking=True,
-        required=True
+        # required=True
     )
 
     operation_type = fields.Selection(
@@ -86,6 +86,12 @@ class MrpDowntime(models.Model):
         string="Approval Type Ref",
         tracking=True,
         required=True
+    )
+
+    license_plate = fields.Many2one(
+        'fleet.vehicle',
+        string="License Plate",
+        tracking=True
     )
 
     reported_by = fields.Many2one(
@@ -250,7 +256,7 @@ class MrpDowntime(models.Model):
 
         tracked_fields = {
             'start_time', 'end_time', 'reason_id',
-            'description', 'production_id', 'operation_type', 'approval_request_reference', 'workcenter_id'
+            'description', 'production_id', 'operation_type', 'approval_request_reference', 'license_plate', 'workcenter_id'
         }
 
         for rec in self:

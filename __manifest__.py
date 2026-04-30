@@ -4,7 +4,7 @@
     "author": "Natnael Yonas",
     'category': 'Manufacturing',
     'summary': 'Log and manage manufacturing downtime with notifications for responsible users, with approval workflow.',
-    'depends': ['mrp', 'mail', 'hr', 'approvals'],
+    'depends': ['mrp', 'mail', 'hr', 'approvals', 'fleet'],
     'data': [
         'security/ir.model.access.csv',
         'data/mrp_downtime_sequence.xml',
